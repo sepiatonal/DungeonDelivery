@@ -1,0 +1,7 @@
+[package]
+name = "dungeon_delivery"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lore_render = { git = "https://github.com/sepiatonal/lore.git" }
