@@ -4,4 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-lore_render = { git = "https://github.com/sepiatonal/lore.git" }
+lore_render = { git = "https://github.com/sepiatonal/lore.git", rev = "0a44fba0db56db08e7bb70cfd0cfcd119fbdfc85" }
+#lore_render = { path = "../lore_project/lore_render" }
