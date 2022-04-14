@@ -87,6 +87,7 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
     };
 
     inv_example.show(&mut st, rendering_instance);
+    inv_example.add_item_anywhere(&mut st, rendering_instance, Item::from_blueprint(&inventory::ITEM_SWORD)).ok();
 
     st
 }

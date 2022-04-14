@@ -127,7 +127,7 @@ impl Button {
             ),
             indices: vec!(2, 1, 3, 0, 1, 2),
         }, gui_pl, Some(texture));
-        let instance = rendering_instance.create_object_instance(mesh, ObjectInstance::from_position(fl_x, fl_y - fl_height, 0.0));
+        let instance = rendering_instance.create_object_instance(mesh, ObjectInstance::from_position(fl_x, fl_y - fl_height, self.z));
         self.instance = instance;
         self.active = true;
     }
