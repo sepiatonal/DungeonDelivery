@@ -93,6 +93,7 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
     dejiko.refresh_params();
 
     john_wick.base_params = BattleBaseParameters {max_hp: 6, attack: 4, defense: 1, strength: 6, speed: 11, armor: 0.00};
+    john_wick.refresh_params();
 
     // return the initialized state
     State {

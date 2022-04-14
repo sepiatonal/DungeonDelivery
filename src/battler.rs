@@ -31,10 +31,6 @@ impl Battler {
             status_effects: HashSet::new()
         }
     }
-
-    pub fn refresh_parameters(&mut self) {
-        
-    }
 }
 
 impl BattleBaseParameters {
@@ -49,6 +45,7 @@ impl BattleBaseParameters {
         self.strength += y.strength;
         self.speed += y.speed;
         self.armor += y.armor;
+        
     }
 }
 
