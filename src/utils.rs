@@ -19,9 +19,3 @@ pub fn exploding_die(sides: u16) -> i16 { //placeholder die rolling function. in
 pub fn percentage() -> f64 {
     return thread_rng().gen_range(0.0..1.0);
 }
-
-#[derive(PartialEq, Eq, Clone, Copy)]
-pub enum Either<L, R> {
-    Left(L),
-    Right(R)
-}

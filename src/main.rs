@@ -16,6 +16,8 @@ use map::*;
 use gui::*;
 use inventory::*;
 use buttons::*;
+use crate::battler::*;
+use crate::party::*;
 use std::collections::HashMap;
 
 const WIDTH: f32 = 640.0;
@@ -73,6 +75,34 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
         scale: 20.0,
         text: "This is some example text".into(),
     });
+
+    // initialize the player party
+    let paris = &mut PlayerUnit {
+        name: "Paris".to_string(),
+        base_params: BattleBaseParameters::new(),
+        battle: Battler::new(),
+    };
+
+    let dejiko = &mut PlayerUnit {
+        name: "Dejiko".to_string(),
+        base_params: BattleBaseParameters::new(),
+        battle: Battler::new(),
+    };
+
+    let john_wick = &mut PlayerUnit {
+        name: "John Wick desu nya!".to_string(),
+        base_params: BattleBaseParameters::new(),
+        battle: Battler::new(),
+    };
+
+    paris.base_params = BattleBaseParameters {max_hp: 8, attack: 3, defense: 2, strength: 6, speed: 9, armor: 0.00};
+    //paris.refresh_params();
+
+    dejiko.base_params = BattleBaseParameters {max_hp: 4, attack: 2, defense: 0, strength: 3, speed: 15, armor: 0.00};
+    //dejiko.refresh_params();
+
+    john_wick.base_params = BattleBaseParameters {max_hp: 6, attack: 4, defense: 1, strength: 6, speed: 11, armor: 0.00};
+    //john_wick.refresh_params();
 
     // return the initialized state
     let mut st = State {

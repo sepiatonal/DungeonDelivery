@@ -34,17 +34,18 @@ impl Battler {
 }
 
 impl BattleBaseParameters {
-    fn new() -> BattleBaseParameters {
+    pub fn new() -> BattleBaseParameters {
         BattleBaseParameters {max_hp: 0, attack: 0, defense: 0, strength: 0, speed: 0, armor: 0.00}
     }
 
-    fn add(&mut self, y: BattleBaseParameters) {
+    pub fn add(&mut self, y: BattleBaseParameters) {
         self.max_hp += y.max_hp;
         self.attack += y.attack;
         self.defense += y.defense;
         self.strength += y.strength;
         self.speed += y.speed;
         self.armor += y.armor;
+        
     }
 }
 
