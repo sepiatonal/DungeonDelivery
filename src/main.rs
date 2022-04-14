@@ -46,10 +46,10 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
     // load shaders
     let pl = rendering_instance.create_default_render_pipeline();
     let gui_pl = rendering_instance.create_default_gui_render_pipeline();
-
     let gui = GUI::create(rendering_instance, gui_pl);
-
     let font_brush = rendering_instance.create_glyph_brush("assets/ui/Dico.ttf");
+
+    let mut inv_example = Inventory::new();
     let text_example = rendering_instance.create_text_box(TextInstance {
         position: (229.0, 259.0),
         dimensions: (430.0, 90.0),
@@ -60,7 +60,7 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
     });
 
     // return the initialized state
-    State {
+    let mut st = State {
         map: Map::new(),
         gui,
         button_handlers: create_button_handlers(),
@@ -69,7 +69,11 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
         mouse_x: 0.0,
         mouse_y: 0.0,
         font_brush,
-    }
+    };
+
+    inv_example.show(&mut st, rendering_instance);
+
+    st
 }
 
 // the update function is called every frame

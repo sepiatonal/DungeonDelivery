@@ -999,7 +999,7 @@ dependencies = [
 [[package]]
 name = "lore_render"
 version = "0.1.2"
-source = "git+https://github.com/sepiatonal/lore.git?rev=b06007c82df63c8c9dbddf5c05c0fa83efd4e1ad#b06007c82df63c8c9dbddf5c05c0fa83efd4e1ad"
+source = "git+https://github.com/sepiatonal/lore.git?rev=524f076b699dbee2a9fabebfff7da3d5fdd3a233#524f076b699dbee2a9fabebfff7da3d5fdd3a233"
 dependencies = [
  "bytemuck",
  "cgmath",

@@ -136,6 +136,11 @@ impl Button {
         rendering_instance.remove_object_instance(self.instance);
         self.active = false;
     }
+
+    pub fn update_position(&mut self, rendering_instance: &mut RenderingInstance) {
+        let mut inst = rendering_instance.get_instance_mut(self.instance);
+        inst.position = (self.x, self.y, self.z).into();
+    }
 }
 
 pub fn create_hud_background(rendering_instance: &mut RenderingInstance, gui_pl: usize) -> (usize, usize) {
