@@ -8,6 +8,7 @@ use lore_render::{
     RenderingInstance,
     VirtualKeyCode, ElementState, KeyboardInput, VirtualKeyCode::*, MouseButton,
     asset_loading::images::load_png,
+    TextInstance,
 };
 use map::*;
 use gui::*;
@@ -25,6 +26,7 @@ struct State {
     player_facing: Direction,
     mouse_x: f64,
     mouse_y: f64,
+    font_brush: usize,
 }
 
 pub fn main() {
@@ -47,6 +49,16 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
     let mut button_handlers: HashMap<String, fn(&mut RenderingInstance, &mut State) -> ()> = HashMap::new();
     button_handlers.insert("up_arrow".into(), on_up_arrow);
 
+    let font_brush = rendering_instance.create_glyph_brush("assets/ui/Dico.ttf");
+    let text_example = rendering_instance.create_text_box(TextInstance {
+        position: (229.0, 259.0),
+        dimensions: (430.0, 90.0),
+        brush: font_brush,
+        color: [0.0, 0.0, 0.0, 1.0],
+        scale: 20.0,
+        text: "This is some example text".into(),
+    });
+
     // return the initialized state
     State {
         map: Map::new(),
@@ -56,6 +68,7 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
         player_facing: Direction::NORTH,
         mouse_x: 0.0,
         mouse_y: 0.0,
+        font_brush,
     }
 }
 
