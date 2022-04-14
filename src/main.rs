@@ -8,6 +8,15 @@ use lore_render::{
     VirtualKeyCode, ElementState,
 };
 
+use bimap::{
+    BiMap,
+};
+
+mod party;
+mod utils;
+mod battle_scene;
+mod battler;
+
 // all gamestate is contained in this struct
 struct State {
     // (usize, usize) is the type of an object ID. don't worry about why

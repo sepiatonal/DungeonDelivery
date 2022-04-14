@@ -5,3 +5,5 @@ edition = "2021"
 
 [dependencies]
 lore_render = { git = "https://github.com/sepiatonal/lore.git" }
+rand = "0.8.5"
+bimap = "0.6.2"
