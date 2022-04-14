@@ -69,3 +69,14 @@ pub struct ItemBlueprint {
     image_dimensions: (f32, f32),
     inv_dimensions: (u8, u8),
 }
+
+//enums
+
+enum ItemType {
+    Weapon,
+    Offhand,
+    Armor,
+    MiscEquip,
+    Usable,
+    Other
+}

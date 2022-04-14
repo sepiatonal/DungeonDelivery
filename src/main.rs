@@ -21,6 +21,15 @@ use std::collections::HashMap;
 const WIDTH: f32 = 640.0;
 const HEIGHT: f32 = 480.0;
 
+use bimap::{
+    BiMap,
+};
+
+mod party;
+mod utils;
+mod battle_scene;
+mod battler;
+
 // all gamestate is contained in this struct
 pub struct State {
     map: Map,
