@@ -116,7 +116,6 @@ impl Item {
         }
     }
 }
-
 pub struct ItemBlueprint {
     name: Cow<'static, str>,
     image_path: Cow<'static, str>,
