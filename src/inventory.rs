@@ -2,8 +2,11 @@ use lore_render::*;
 use crate::*;
 use gui::*;
 
+pub const INV_WIDTH: u8 = 5;
+pub const INV_HEIGHT: u8 = 10;
+
 pub struct Inventory {
-    background: gui::Button,
+    background: Button,
     items: Vec<((u8, u8), Item)>,
 }
 
@@ -35,8 +38,44 @@ impl Inventory {
         self.background.destroy(rendering_instance);
     }
 
-    pub fn add_item(&mut self, item: Item) {
-        
+    pub fn item_fits(&self, item: &Item, pos: (u8, u8)) -> bool {
+        let (x, y) = pos;
+        let (w, h) = item.blueprint.inv_dimensions;
+        for (other_pos, other_item) in &self.items {
+            let (ox, oy) = other_pos.clone();
+            let (ow, oh) = other_item.blueprint.inv_dimensions;
+
+            if x + w < ox {
+                return true;
+            }
+            if ox + ow < x {
+                return true;
+            }
+            if y + h < oy {
+                return true;
+            }
+            if oy + oh < y {
+                return true;
+            }
+        }
+
+        false
+    }
+
+    pub fn add_item(&mut self, item: Item, pos: (u8, u8)) {
+        self.items.push((pos, item));
+    }
+
+    pub fn add_item_anywhere(&mut self, item: Item) -> Result<(u8, u8), ()> {
+        for x in 0..INV_WIDTH {
+            for y in 0..INV_HEIGHT {
+                if self.item_fits(&item, (x, y)) {
+                    self.add_item(item, (x, y));
+                    return Ok((x, y));
+                }
+            }
+        }
+        Err(())
     }
 }
 
@@ -62,7 +101,6 @@ impl Item {
         }
     }
 }
-
 pub struct ItemBlueprint {
     name: String,
     image_path: String,
@@ -71,7 +109,6 @@ pub struct ItemBlueprint {
 }
 
 //enums
-
 enum ItemType {
     Weapon,
     Offhand,
