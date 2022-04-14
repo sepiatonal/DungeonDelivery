@@ -20,8 +20,6 @@ impl PlayerUnit {
         self.battle.params = self.base_params.clone();
 
         // add any modifiers from equipment here.
-
-        self.battle.cur_hp = self.battle.params.max_hp;
     }
 }
 
