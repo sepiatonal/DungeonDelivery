@@ -104,6 +104,11 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
     john_wick.base_params = BattleBaseParameters {max_hp: 6, attack: 4, defense: 1, strength: 6, speed: 11, armor: 0.00};
     //john_wick.refresh_params();
 
+    let mut party = PlayerParty { members: Vec::new() };
+    party.add_member(paris, 0, 0);
+    party.add_member(dejiko, 2, 0);
+    party.add_member(john_wick, 1, 1);
+
     // return the initialized state
     let mut st = State {
         map: Map::new(),

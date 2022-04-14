@@ -17,7 +17,7 @@ pub struct PlayerParty {
 }
 
 impl PlayerParty {
-    fn index_of(&self, x: usize, y: usize) -> Option<usize> {
+    pub fn index_of(&self, x: usize, y: usize) -> Option<usize> {
         for (i, (_, x1, y1)) in self.members.iter().enumerate() {
             if &x == x1 && &y == y1 {
                 return Some(i);
@@ -26,11 +26,11 @@ impl PlayerParty {
         return None;
     }
 
-    fn is_occupied(&self, x: usize, y: usize) -> bool {
+    pub fn is_occupied(&self, x: usize, y: usize) -> bool {
         return self.index_of(x, y).is_some()
     }
 
-    fn add_member(&mut self, unit: &PlayerUnit, x: usize, y: usize) -> bool { /*put some error correction here lol */
+    pub fn add_member(&mut self, unit: &PlayerUnit, x: usize, y: usize) -> bool { /*put some error correction here lol */
         if self.members.len() >= 5 || self.is_occupied(x, y) || x >= PARTY_MAX_X || y >= PARTY_MAX_Y {
             return false;
         } else {
@@ -39,7 +39,7 @@ impl PlayerParty {
         }
     }
 
-    fn remove_member(&mut self, index: usize) -> bool {
+    pub fn remove_member(&mut self, index: usize) -> bool {
         if self.members.len() <= index {
             return false;
         } else {
