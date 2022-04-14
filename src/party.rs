@@ -1,4 +1,3 @@
-use bimap::BiMap;
 use crate::battler::{ Battler, BattleBaseParameters };
 
 const PARTY_MAX_X: usize = 4;
@@ -16,7 +15,21 @@ pub struct PlayerParty {
     pub members: Vec<(PlayerUnit, usize, usize)>, /* unit, x, y */
 }
 
+impl PlayerUnit {
+    pub fn refresh_params(&mut self) {
+        self.battle.params = self.base_params.clone();
+
+        // add any modifiers from equipment here.
+    }
+}
+
 impl PlayerParty {
+    pub fn new() -> PlayerParty {
+        return PlayerParty {
+            members: Vec::new(),
+        }
+    }
+
     pub fn index_of(&self, x: usize, y: usize) -> Option<usize> {
         for (i, (_, x1, y1)) in self.members.iter().enumerate() {
             if &x == x1 && &y == y1 {

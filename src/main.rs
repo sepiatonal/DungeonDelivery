@@ -2,6 +2,10 @@ mod map;
 mod gui;
 mod buttons;
 mod inventory;
+mod party;
+mod utils;
+mod battle_scene;
+mod battler;
 
 use lore_render::{
     ObjectInstance,
@@ -16,21 +20,12 @@ use map::*;
 use gui::*;
 use inventory::*;
 use buttons::*;
-use crate::battler::*;
-use crate::party::*;
+use party::*;
+use battler::*;
 use std::collections::HashMap;
 
 const WIDTH: f32 = 640.0;
 const HEIGHT: f32 = 480.0;
-
-use bimap::{
-    BiMap,
-};
-
-mod party;
-mod utils;
-mod battle_scene;
-mod battler;
 
 // all gamestate is contained in this struct
 pub struct State {
@@ -39,9 +34,11 @@ pub struct State {
     button_handlers: HashMap<String, fn(&mut RenderingInstance, &mut State) -> ()>,
     player_location: Vector2<u8>,
     player_facing: Direction,
+    player_party: PlayerParty,
     mouse_x: f64,
     mouse_y: f64,
     font_brush: usize,
+
 }
 
 impl State {
@@ -96,18 +93,18 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
     };
 
     paris.base_params = BattleBaseParameters {max_hp: 8, attack: 3, defense: 2, strength: 6, speed: 9, armor: 0.00};
-    //paris.refresh_params();
+    paris.refresh_params();
 
     dejiko.base_params = BattleBaseParameters {max_hp: 4, attack: 2, defense: 0, strength: 3, speed: 15, armor: 0.00};
-    //dejiko.refresh_params();
+    dejiko.refresh_params();
 
     john_wick.base_params = BattleBaseParameters {max_hp: 6, attack: 4, defense: 1, strength: 6, speed: 11, armor: 0.00};
-    //john_wick.refresh_params();
+    john_wick.refresh_params();
 
-    let mut party = PlayerParty { members: Vec::new() };
-    party.add_member(paris, 0, 0);
-    party.add_member(dejiko, 2, 0);
-    party.add_member(john_wick, 1, 1);
+    let mut player_party = PlayerParty { members: Vec::new() };
+    player_party.add_member(paris, 0, 0);
+    player_party.add_member(dejiko, 2, 0);
+    player_party.add_member(john_wick, 1, 1);
 
     // return the initialized state
     let mut st = State {
@@ -116,6 +113,7 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
         button_handlers: create_button_handlers(),
         player_location: (0, 0).into(),
         player_facing: Direction::NORTH,
+        player_party,
         mouse_x: 0.0,
         mouse_y: 0.0,
         font_brush,
