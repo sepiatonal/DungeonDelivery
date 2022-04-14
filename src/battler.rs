@@ -91,7 +91,7 @@ impl HasHP for Battler {
     }
 
     fn die(&mut self) {
-        todo!();
+        self.status_effects.insert(StatusEffect::Dead);
     }
 }
 
