@@ -1,5 +1,7 @@
 mod map;
 mod gui;
+mod buttons;
+mod inventory;
 
 use lore_render::{
     ObjectInstance,
@@ -12,13 +14,15 @@ use lore_render::{
 };
 use map::*;
 use gui::*;
+use inventory::*;
+use buttons::*;
 use std::collections::HashMap;
 
 const WIDTH: f32 = 640.0;
 const HEIGHT: f32 = 480.0;
 
 // all gamestate is contained in this struct
-struct State {
+pub struct State {
     map: Map,
     gui: GUI,
     button_handlers: HashMap<String, fn(&mut RenderingInstance, &mut State) -> ()>,
@@ -45,10 +49,6 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
 
     let gui = GUI::create(rendering_instance, gui_pl);
 
-    // Copy/paste this and change some shit
-    let mut button_handlers: HashMap<String, fn(&mut RenderingInstance, &mut State) -> ()> = HashMap::new();
-    button_handlers.insert("up_arrow".into(), on_up_arrow);
-
     let font_brush = rendering_instance.create_glyph_brush("assets/ui/Dico.ttf");
     let text_example = rendering_instance.create_text_box(TextInstance {
         position: (229.0, 259.0),
@@ -63,7 +63,7 @@ fn setup(rendering_instance: &mut RenderingInstance) -> State {
     State {
         map: Map::new(),
         gui,
-        button_handlers,
+        button_handlers: create_button_handlers(),
         player_location: (0, 0).into(),
         player_facing: Direction::NORTH,
         mouse_x: 0.0,
@@ -170,8 +170,4 @@ fn map_location_shifted(pos: Vector2<u8>, dir: Direction) -> Vector2<u8> {
             } else { pos }
         },
     }
-}
-
-fn on_up_arrow(rendering_instance: &mut RenderingInstance, state: &mut State) {
-    println!("Up!");
 }
