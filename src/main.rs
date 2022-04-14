@@ -50,12 +50,6 @@ impl State {
     }
 }
 
-impl State {
-    pub fn current_inventory(&self) -> &Inventory {
-        todo!();
-    }
-}
-
 pub fn main() {
     lore_render::run(
         setup,
